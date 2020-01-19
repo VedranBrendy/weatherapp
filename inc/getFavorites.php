@@ -6,7 +6,7 @@
   $user_id =  $_SESSION['id'];
 
   // Include DB
-  include_once('db.php');
+  include_once('../db.php');
 
   // Prepare query
   $sql = 'SELECT * FROM favorites WHERE user_id = :user_id'; 
@@ -23,7 +23,7 @@
 
         ?>
           <div class="card">
-            <div class="card-header">Favorites 
+            <div class="card-header">Favorites <span class="badge badge-pill badge-primary font-weight-bold"><?php echo $stmt->rowCount();?>/10</span>
               <span class="float-right">
                 <button class="btn btn-danger btn-sm">Clear list</button>
               </span>

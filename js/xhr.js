@@ -2,7 +2,7 @@
 function getFavoritesXHR() {
   //Ajax to get data from DB
   let xhr = new XMLHttpRequest();
-  xhr.open('GET', 'getFavorites.php', true);
+  xhr.open('GET', 'inc/getFavorites.php', true);
   xhr.onload = function () {
 
     if (this.status == 200) {
@@ -19,7 +19,7 @@ function addToFavoritesXHR(locationFromLS) {
 
   let xhr = new XMLHttpRequest();
   var params = "result=" + locationFromLS;
-  xhr.open('POST', 'saveFavorites.php', true);
+  xhr.open('POST', 'inc/saveFavorites.php', true);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     //If response successful -alert success
@@ -34,6 +34,10 @@ function addToFavoritesXHR(locationFromLS) {
 
         //on success get new data from database
         getFavoritesXHR();
+
+      } else if (this.responseText === "reached") {
+
+        alertModal("You have reach limit of 10 favorite locations");
 
       }
       //If cancelled show alert message - testig purpose
@@ -50,7 +54,7 @@ function addToFavoritesXHR(locationFromLS) {
 /* Delete favorites list from DB */
 function deleteFavoritesXHR(list) {
   let xhr = new XMLHttpRequest();
-  xhr.open('GET', 'deleteFavorites.php?list=' + list, true);
+  xhr.open('GET', 'inc/deleteFavorites.php?list=' + list, true);
   xhr.onload = function () {
 
     if (xhr.readyState == 4 && xhr.status == 200) {
@@ -70,7 +74,7 @@ function deleteFavoritesXHR(list) {
 /*  Delete single location from favorites list */
 function deleteFavoriteItem(item) {
   let xhr = new XMLHttpRequest();
-  xhr.open('GET', 'deleteFavorites.php?item=' + item, true);
+  xhr.open('GET', 'inc/deleteFavorites.php?item=' + item, true);
   xhr.onload = function () {
 
     if (xhr.readyState == 4 && xhr.status == 200) {
